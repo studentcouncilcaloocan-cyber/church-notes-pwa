@@ -86,3 +86,10 @@
 
 /* v1.4 Offline Bible Library */
 .offline-bible-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0 20px}.offline-bible-item{border:1px solid var(--border,#d9e0ea);border-radius:12px;padding:14px;display:flex;flex-wrap:wrap;align-items:center;gap:10px}.offline-bible-item strong,.offline-bible-item p{width:100%;margin:0}.offline-bible-controls{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.offline-bible-controls input,.offline-bible-controls select{flex:1 1 130px;min-width:0}.offline-bible-reader{max-height:420px;overflow:auto;border:1px solid var(--border,#d9e0ea);border-radius:10px;padding:14px}.offline-bible-reader p{line-height:1.6}@media(max-width:650px){.offline-bible-row{grid-template-columns:1fr}.offline-bible-controls>*{flex:1 1 100%}}
+
+/* v1.4.4: consistent single-spaced notes on desktop and mobile. */
+#noteBody.editor{line-height:1!important;white-space:normal;overflow-wrap:anywhere;}
+#noteBody.editor p,#noteBody.editor div,#noteBody.editor blockquote,#noteBody.editor h1,#noteBody.editor h2,#noteBody.editor h3,#noteBody.editor ul,#noteBody.editor ol,#noteBody.editor li{margin-top:0!important;margin-bottom:0!important;line-height:1!important;}
+#noteBody.editor blockquote{margin-left:0!important;margin-right:0!important;padding-top:0;padding-bottom:0;}
+#noteBody.editor ul,#noteBody.editor ol{padding-left:1.6em;}
+#noteBody.editor li{padding-top:0;padding-bottom:0;}
