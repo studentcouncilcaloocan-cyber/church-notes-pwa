@@ -29,28 +29,9 @@ function noteList(arr,empty="No notes yet."){const wrap=document.createElement("
 function catName(cid){return categories.find(c=>c.id===cid)?.name||"Uncategorized"}
 function sorted(arr){return [...arr].sort((a,b)=>b.updatedAt-a.updatedAt)}
 function home(){
-  // Build the welcome row as a single stable component before mounting the verse card.
+  // The Home heading is an independent sibling of #content; Bible card rendering cannot erase it.
   const content=$("#content");
   content.replaceChildren();
-  const welcome=document.createElement("section");
-  welcome.className="home-welcome";
-  welcome.setAttribute("aria-label","MCGI Notes welcome");
-  const text=document.createElement("div");
-  text.className="home-welcome-text";
-  const heading=document.createElement("h1");
-  heading.textContent="Welcome to MCGI Notes";
-  const subtitle=document.createElement("p");
-  subtitle.className="muted lead";
-  subtitle.textContent="Your personal offline notebook and Bible verse cards.";
-  text.append(heading,subtitle);
-  const create=document.createElement("button");
-  create.type="button";
-  create.className="primary home-create-note";
-  create.textContent="+ Create Note";
-  create.addEventListener("click",createNote);
-  welcome.append(text,create);
-  content.append(welcome);
-  // A failure in the Bible companion must never remove the welcome/action row.
   try{window.ChurchNotesBible?.companion("share",content)}
   catch(error){console.error("Bible share card failed to mount",error);const warning=document.createElement("p");warning.className="muted";warning.textContent="Bible card temporarily unavailable. Your notes are safe.";content.append(warning)}
   const grid=document.createElement("div");grid.className="grid";
@@ -81,7 +62,7 @@ function categoryScreen(){shell("Categories","Use preset gatherings or add your 
 function settings(){shell("Settings","Personalize the offline application.");$("#content").insertAdjacentHTML("beforeend",`<section class="card"><h2>Appearance</h2><label for="themeSelect">Color theme</label> <select id="themeSelect"><option value="system">Follow system</option><option value="light">Light</option><option value="dark">Dark</option></select><p class="muted">Database: IndexedDB (this device only).</p><p class="muted">Notes are not synchronized across devices. Use Backup & Restore to export a portable JSON backup regularly.</p></section>`);$("#themeSelect").value=theme();$("#themeSelect").onchange=e=>setTheme(e.target.value);window.ChurchNotesBible?.companion("settings",$("#content"))}
 function bible(){route("home")}
 
-function render(){if(!db)return;nav();const p=current();if(p!=="editor"){activeId=null;editorControls=null;dirty=false}({home,notes:()=>library(false),editor,calendar,bookmarks:()=>library(true),categories:categoryScreen,bible,settings,backup:()=>window.ChurchNotesBackup?.render()}[p]||home)()}
+function render(){if(!db)return;nav();const p=current();$("#homeTop").hidden=p!=="home";if(p!=="editor"){activeId=null;editorControls=null;dirty=false}({home,notes:()=>library(false),editor,calendar,bookmarks:()=>library(true),categories:categoryScreen,bible,settings,backup:()=>window.ChurchNotesBackup?.render()}[p]||home)()}
 addEventListener("hashchange",async()=>{await flush();render()});
 addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")flush().catch(console.error)});
 addEventListener("pagehide",()=>{flush().catch(console.error)});
@@ -89,5 +70,6 @@ addEventListener("beforeunload",e=>{if(dirty){e.preventDefault();e.returnValue="
 addEventListener("beforeinstallprompt",e=>{e.preventDefault();installPrompt=e;$("#installBtn").hidden=false});$("#installBtn").onclick=async()=>{if(!installPrompt)return;installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;$("#installBtn").hidden=true};
 if("serviceWorker"in navigator&&location.protocol!=="file:")addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(console.error));
 window.ChurchNotesInsertVerse=async text=>{if(current()!=="editor"||!editorControls){alert("Open a note before inserting a verse.");return}const editor=editorControls.body;editor.focus();const p=document.createElement("p");p.textContent=text;editor.append(p);dirty=true;clearTimeout(saveTimer);saveTimer=setTimeout(()=>flush().catch(console.error),500);editor.dispatchEvent(new Event("input",{bubbles:true}))};
+$("#homeCreateNote").addEventListener("click",createNote);
 window.ChurchNotesStorage={all,flush,db:()=>db};theme();init();
 })();

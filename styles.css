@@ -68,3 +68,8 @@
 #content>.home-welcome .lead{margin:0}
 #content>.home-welcome .home-create-note{display:inline-flex;align-items:center;justify-content:center;min-height:44px;flex-shrink:0;white-space:nowrap}
 @media(max-width:640px){#content>.home-welcome{flex-direction:column;align-items:stretch;gap:12px}#content>.home-welcome .home-create-note{width:100%;min-height:46px}}
+
+/* v1.3.4: Home heading lives outside the Bible card render target. */
+#homeTop[hidden]{display:none!important}
+#homeTop{max-width:100%;margin:0 auto 20px;width:100%}
+@media(max-width:640px){#homeTop{flex-direction:column;align-items:stretch}#homeTop .home-create-note{width:100%}}
