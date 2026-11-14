@@ -1,15 +1,19 @@
-# MCGI Notes v1.1 — UI and navigation update
+# MCGI Notes v1.2 — Complete production update
 
-Complete root-level GitHub Pages upload package (12 files). No staging.
+Upload all root-level files to the existing `church-notes-pwa` GitHub Pages repository. Export a JSON backup first. Do not clear site storage.
 
-- Renamed display name and install manifest to MCGI Notes.
-- Moved Bible Verse Share Cards to Home.
-- Moved automatic Bible API translation and Bible preferences to Settings.
-- Removed Bible Companion from navigation.
-- Replaced below-editor detected reference panel with a contextual suggestion popup at the caret.
-- Preserved IndexedDB name `church-notes`, schema version 2, localStorage preference keys and backup format to protect existing data.
-- Preserved current GitHub Pages URL, service worker scope, and API integrations.
+## Changes
+- Bible Verse Card preview appears first on Home; search/version/size/font/theme controls follow.
+- Card canvas renders reference, then Bible version, then verse body, then optional `#MCGIKnows` footer. No API provider source is printed on cards.
+- Splash animation opens a stylized Bible and reveals the user-supplied MCGI Notes logo once per page launch. Honors reduced motion.
+- Preserves IndexedDB and existing application routes, notes, Bible lookups, backups, and settings.
 
-Before upload: export a JSON backup. Upload all 12 files to the root of the existing `main` branch and commit. Refresh online twice after Pages deployment. Verify ADB/KJV, inline popup, share card and backups on both desktop and mobile.
+## Acceptance tests
+1. Backup first, upload all files and refresh twice online.
+2. Verify Home card preview at top; search ADB and KJV verses.
+3. Verify reference > version > body in preview and exported PNG.
+4. Verify card size/font/theme dropdowns and `#MCGIKnows` footer.
+5. Verify splash on launch and no splash during internal navigation; reduced-motion.
+6. Verify notes, inline suggestions, settings, offline mode, and backup.
 
-Important: browser `document.execCommand` is legacy. JSON backups are not encrypted. API lookup requires connectivity on first use; cached verses can be used offline.
+No data migration or staging. Browser acceptance testing remains required.
