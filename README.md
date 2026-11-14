@@ -1,36 +1,49 @@
-# Church Notes PWA — Phase 1 Foundation
+# Church Notes — Phase 2 Staging
 
-This is a complete **Phase 1 only** static PWA build, not a completed notes editor.
+## Purpose
+A complete, dependency-free Phase 2 staging package. **Do not overwrite the existing Phase 1 production repository.** Deploy to a separate public GitHub Pages repository, e.g. `church-notes-pwa-staging`.
 
 ## Included
-- Responsive desktop sidebar and mobile drawer
-- Light, dark and system-adaptive theme
-- Seven planned navigation screens
-- Installable web manifest and local icon assets
-- Offline app shell service worker
-- IndexedDB database with `notes`, `categories`, `settings`, `bibleVersions` stores
-- No login, backend, cloud synchronization, or external dependencies
+- Working notes editor: bold, italic, underline, headings, quote, bullet/numbered lists, undo/redo
+- Debounced IndexedDB autosave (500ms), Save now, duplicate and confirmed delete
+- Editable preset/custom gathering categories
+- Search note title/body/category, filter and sort
+- Calendar grouped by gathering date
+- Bookmarks, recent notes, theme preference, responsive mobile drawer
+- Installable PWA with offline shell
+- Version 2 upgrade of existing database schema (when opened on same origin; staging uses a separate origin/path)
 
-## Run and install
-A service worker requires HTTPS or localhost. Opening `index.html` via `file://` will **not** enable offline installation.
+## Not included yet
+- Phase 3: MCGI Digital Bible integration, automatic verse detection, verse preview, 1080×1920 / 1080×1080 share cards
+- Phase 4: backup/export/import, stronger security and comprehensive regression testing
+- Cross-device sync or user accounts
 
-**Browser-first deployment:** Create a Firebase Hosting site (Spark plan), upload/deploy these exact static files as the Hosting public directory. Firebase Hosting cannot deploy a ZIP through its browser console alone; use Firebase CLI or GitHub Actions to deploy.
+## Browser-first deployment
+1. GitHub > New repository > `church-notes-pwa-staging`, Public, empty (do not initialize with README).
+2. Upload the **nine extracted files** from this package directly to repository root; commit.
+3. Settings > Pages > Source: Deploy from a branch > main > /(root) > Save.
+4. Open `https://studentcouncilcaloocan-cyber.github.io/church-notes-pwa-staging/` once Pages reports it is published.
+5. Do not upload these files to `church-notes-pwa` until approved.
 
-**Local test:** With Python installed, open a terminal in this folder and run `python -m http.server 8080`, then visit `http://localhost:8080`. For install testing, use Chrome's install option where supported.
+## Verification checklist (Chrome)
+1. Homepage and all eight navigation destinations work.
+2. On narrow screen, drawer opens/closes via menu, overlay, Escape.
+3. Create a note, enter title and content, apply bold/italic/underline, headings and lists.
+4. Wait for `Saved locally`, reload, verify title/content/formatting remain.
+5. Edit gathering date and category, reload, verify they remain.
+6. Add a custom category, rename it, and filter notes by it.
+7. Search note body and title; sort by title/date/recently edited.
+8. Bookmark a note; confirm it appears in Bookmarks and persists after reload.
+9. Open Calendar, navigate months, select a date with a note and open it.
+10. Duplicate a note; delete the duplicate after confirmation; verify original remains.
+11. Switch theme and reload; test mobile navigation.
+12. In Chrome DevTools > Application > IndexedDB, verify `church-notes` database and stores `notes`, `categories`, `settings`, `bibleVersions`.
+13. After an online load, Network > Offline, reload, edit and save a note, reload again while offline. Verify the change remains.
+14. Install as PWA on Chrome if offered, and open it in standalone mode.
+15. Revisit Phase 1 production URL and confirm it remains unchanged.
 
-**GitHub Pages alternative:** Upload these files to a GitHub repository, enable Pages from the root of its publishing branch, and open the resulting HTTPS URL. This is suitable for testing without Firebase CLI. Note that Pages on a public repository exposes app source code, but **not** your locally stored notes.
+## Data safety
+This is a staging build and has **no export/backup feature yet**. Do not store irreplaceable notes here. Browser storage may be cleared or evicted. Staging and production GitHub Pages repository paths share an origin; this package currently uses the same IndexedDB database name as Phase 1. Phase 1 has no note editor, but **do not rely on repository separation as database isolation**. For stronger isolation, use a separate Chrome profile for staging. Phase 2 should not be promoted until backup/data-migration concerns are resolved.
 
-## Phase 1 acceptance tests
-1. Open site on desktop and navigate through all seven screens.
-2. Resize to mobile; hamburger drawer opens, links navigate, overlay and Escape close it.
-3. Change theme in Settings, reload, verify preference persists.
-4. In DevTools > Application > IndexedDB verify `church-notes` stores exist.
-5. In DevTools > Application > Service Workers verify registration.
-6. Load site once online, then use DevTools > Network > Offline and reload. Shell should still load.
-7. On supported Chrome/Android browsers, use Install App or browser installation menu.
-
-## Boundaries
-Notes editor, autosave, search, categories management, Bible data, MCGI links, verse share card PNG export, backup/restore and security hardening are not implemented in Phase 1. There is no "SCRIPTURE VERSE" heading in the planned share-card design.
-
-## Important
-Do not store important church notes in this Phase 1 foundation. Keep your original notes elsewhere until Phase 2 is complete and verified.
+## Caveats
+The rich-text toolbar uses browser `document.execCommand` for a dependency-free initial editor. It is deprecated and should be replaced with a maintained editor before long-term production use. The service worker is cache-first and requires a cache-version bump for future updates.
