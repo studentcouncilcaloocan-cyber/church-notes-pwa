@@ -9,3 +9,7 @@ Installed versions are used before online Bible API lookup. The offline reader a
 No existing notes database migration. The downloaded Bible is not included in the notes backup. Verify Bible provider distribution terms for your jurisdiction before redistributing data.
 
 Source: https://api.getbible.net/v2/tagalog.json and https://api.getbible.net/v2/kjv.json.
+
+
+## v1.4.1 fix
+Bible suggestions now detect the verse reference within the active editor paragraph rather than combining all paragraphs into a single text string. Cursor offsets are computed from text nodes, preserving inline formatting and repeated references in subsequent paragraphs. No database migration or changes to stored notes.
