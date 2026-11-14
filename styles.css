@@ -97,3 +97,10 @@
 /* Keep auto-formatted list on the same line; only the marker is replaced. */
 #noteBody.editor ul,#noteBody.editor ol{margin-block:0!important;}
 #noteBody.editor li{min-height:1.5em;}
+
+/* v1.4.7 compact editor and lookup actions */
+.compact-icon{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;min-width:42px;padding:0!important;font-size:21px;line-height:1;vertical-align:middle}
+.verse-dialog .verse-close{position:sticky;top:0;float:right;z-index:2;margin:-10px -10px 8px 8px;background:var(--panel)}
+.verse-side-panel .verse-close{float:right;margin:0 0 12px 12px}
+.api-verse-result .actions .compact-icon{flex:0 0 42px}
+@media(max-width:600px){.compact-icon{width:44px;height:44px;min-width:44px}}
