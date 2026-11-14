@@ -170,3 +170,12 @@
 
 /* v1.5.1 Words of Wisdom: responsive in-app playlist player */
 .wisdom-library{min-width:0}.wisdom-search{display:block;width:100%;margin:12px 0 18px}.wisdom-layout{display:grid;grid-template-columns:minmax(0,2fr) minmax(200px,1fr);gap:16px;align-items:start}.wisdom-player{min-width:0}.wisdom-player iframe{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#121b2c}.wisdom-player p{margin:10px 0}.wisdom-playlists{display:grid;gap:8px;max-height:440px;overflow-y:auto;min-width:0}.wisdom-playlist-item{display:flex;gap:12px;align-items:center;text-align:left;min-width:0;overflow-wrap:anywhere;padding:13px}.wisdom-playlist-item[aria-pressed=true]{border-color:var(--accent);background:var(--hover)}.wisdom-playlist-icon{display:grid;place-items:center;flex:none;width:54px;height:40px;background:#1b2b46;color:white;border-radius:8px}.wisdom-library .actions a{padding:8px;border:1px solid var(--line);border-radius:8px}@media(max-width:760px){.wisdom-layout{grid-template-columns:1fr}.wisdom-playlists{max-height:270px}}
+
+/* v1.5.2: external heading, centered verse/date, true-aspect preview inside the white card */
+.verse-card-outside-title{font-size:23px;margin:0 0 14px 0;font-weight:700}
+.verse-card-home{border-radius:22px;margin-bottom:20px}
+.verse-card-home .verse-card-standalone{padding:18px 8px 26px;max-width:100%;overflow:hidden}
+.verse-card-home .verse-card-standalone .share-preview{display:block;max-width:100%!important;max-height:none!important;width:min(100%,340px)!important;height:auto!important;object-fit:contain;box-shadow:0 17px 38px #0003,0 3px 9px #0002}
+.verse-card-home .verse-card-standalone .share-preview[height="1080"]{width:min(100%,500px)!important}
+.verse-card-home .share-controls{margin-top:4px}
+@media(max-width:600px){.verse-card-home .verse-card-standalone .share-preview{width:min(78vw,340px)!important}.verse-card-home .verse-card-standalone .share-preview[height="1080"]{width:min(88vw,500px)!important}}
