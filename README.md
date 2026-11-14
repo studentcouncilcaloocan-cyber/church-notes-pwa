@@ -1,10 +1,16 @@
-# MCGI Notes v1.5.2 — Bible Verse Card layout correction
+# MCGI Notes v1.5.3 — Words of Wisdom review candidate
 
-Changes from v1.5.1:
-- "Bible Verse Card" is now a standalone heading outside the white card container, like "Recent notes".
-- Inside the white container, the order is Verse of the Day, date, true-aspect 9:16/1:1 card preview, then search/version/size/font/theme and remaining controls.
-- Preserves IndexedDB, offline Bible, existing Words of Wisdom playlist player, and all other files.
+Includes v1.5.2 Verse of the Day layout fix and new Words of Wisdom horizontal carousel, title search, playlist tabs, and in-app YouTube playback. Existing IndexedDB notes and offline Bible code are retained.
 
-Important: Individual Words of Wisdom video metadata carousel is not implemented in this release. The existing embedded YouTube playlist controls remain available. Playback requires internet and browser autoplay policies apply.
+## Important: catalog not yet populated
+`videos.json` contains two playlist records with empty video arrays. The video extraction cannot be verified in the build environment because YouTube network access and yt-dlp are unavailable. **Do not deploy this candidate as a completed video catalog.** The playlist iframe remains functional when YouTube permits embedding, even without catalog metadata.
 
-Deploy by uploading all files at the ZIP root to the existing GitHub Pages repository root, only after making a JSON backup of your notes. No IndexedDB data migration or reset is performed.
+## Automated refresh
+Upload all ZIP contents, including `.github/workflows/update-wisdom-catalog.yml` and `scripts/update-wisdom-catalog.py`, to a **review branch first**. On that branch, manually trigger the `Update Words of Wisdom catalog` GitHub Action. The workflow installs yt-dlp and extracts both playlists, preserving the existing catalog on failure. Check the Action logs and `videos.json` before any merge into main. Scheduled runs only operate on the default branch once approved and merged. GitHub Actions requires workflow write permission (`Settings > Actions > General > Workflow permissions > Read and write permissions`) for automatic commits; if blocked, adjust permissions with repository owner approval.
+
+The video catalog does not cache actual videos; internet is required for playback. Autoplay with sound may be blocked by browsers or YouTube. Some videos may prohibit embedding.
+
+
+## Words of Wisdom catalog activation
+
+The first catalog is empty until GitHub Actions successfully runs `Update Words of Wisdom catalog`. In GitHub: Actions > Update Words of Wisdom catalog > Run workflow. After it commits videos.json, refresh the website. Future daily updates run automatically. The workflow needs GitHub Actions write permissions and access to YouTube. YouTube may restrict extraction or autoplay; these cannot be guaranteed.
