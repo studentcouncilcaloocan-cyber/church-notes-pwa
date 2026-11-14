@@ -42,9 +42,17 @@ async function lookup(ref,v=version(),options={}){
  const passage=window.MCGIPassage?.parse(ref);
  if(passage&&passage.parts.length>1){
   if(!ids.has(v))throw Error('Unsupported translation');
-  const pieces=[];
-  for(const part of passage.parts){const item=await lookup(part.ref,v,options);pieces.push({reference:part.ref,text:item.text});}
-  return {text:pieces.map(p=>p.reference+' — '+p.text).join('\n'),reference:passage.reference,translation:v,translationName:label(v),provider:'Offline Bible Library / Bible API',offline:!navigator.onLine};
+  // Preserve the user's comma/semicolon groups and their original order.
+  // Fetch using the explicitly selected translation; never substitute English for ADB.
+  const lines=[];let allOffline=true;
+  for(const group of passage.groups){
+   const reference=passage.book+' '+group.chapter+':'+group.start+(group.end!==group.start?'-'+group.end:'');
+   const item=await lookup(reference,v,options);
+   if(item.translation!==v)throw Error('Bible translation mismatch. No verses were inserted.');
+   allOffline=allOffline&&Boolean(item.offline);
+   lines.push(group.label+'. '+item.text);
+  }
+  return {text:lines.join('\n\n'),reference:passage.reference,translation:v,translationName:label(v),provider:'Offline Bible Library / Bible API',offline:allOffline};
  }
 if(!ids.has(v))throw Error('Unsupported translation');const normalized=normalize(ref),existing=cached(normalized,v);const local=await window.MCGIOfflineBible?.lookup(normalized,v);if(local&&!options.refresh)return local;if(existing&&!options.refresh)return {...existing,offline:true};if(!navigator.onLine){if(local)return local;if(existing)return {...existing,offline:true};throw Error('Offline: this reference is not cached yet. Connect to the internet once to save it for offline reading.')}
 const k=key(normalized,v);if(pending.has(k))return pending.get(k);

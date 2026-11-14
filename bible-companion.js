@@ -49,7 +49,7 @@ if(rawEnd!==pos){close();return}const typed=full.slice(rawStart,rawEnd),detected
 const version=window.ChurchNotesBibleAPI?.version()||"tagalog",label=formatReference(detected.ref,version);
 if(currentRef!==detected.ref||lastCaret!==pos){currentRef=detected.ref;lastCaret=pos;popup.replaceChildren();const heading=document.createElement("strong");heading.textContent=label;const caption=document.createElement("small");caption.textContent=window.ChurchNotesBibleAPI?.label(version)||"Bible reference";const actions=document.createElement("div");actions.className="actions";
 const preview=btn("Preview verse",()=>{close();showRef(detected.ref,document.body)},"primary");
-const insert=btn("Insert verse",async()=>{close();insert.disabled=true;try{const api=window.ChurchNotesBibleAPI;const data=await api.lookup(detected.ref,api.version());const replacement=formatReference(detected.ref,api.version())+" — "+data.text;
+const insert=btn("Insert verse",async()=>{close();insert.disabled=true;try{const api=window.ChurchNotesBibleAPI;const data=await api.lookup(detected.ref,api.version());const replacement=window.MCGIPassage?.parse(detected.ref)?.groups.length>1?data.text:formatReference(detected.ref,api.version())+" — "+data.text;
 // Never replace text that has changed while the async lookup was pending.
 const current=textNodes().map(n=>n.textContent).join("");if(current.slice(rawStart,rawEnd)!==typed){alert("The reference changed while loading. Please select Insert verse again.");return}
 const range=makeRange(rawStart,rawEnd);if(!range){alert("Could not locate the original reference. No changes were made.");return}

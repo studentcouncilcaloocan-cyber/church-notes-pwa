@@ -1,1 +1,1 @@
-MCGI Notes v1.4.5 — 1.5 line spacing; no paragraph margins; in-place automatic list conversion. Existing IndexedDB data and offline Bible library unchanged. Back up notes before deployment. Browser and mobile keyboard behavior require live verification.
+MCGI Notes v1.4.6 — compound Bible passage display fix. Based on v1.4.5. Compound groups render as chapter:verse-range / verse / chapter:verse followed by selected-translation text. No database schema changes. Test ADB and KJV, online/offline, on the live PWA before approval.
