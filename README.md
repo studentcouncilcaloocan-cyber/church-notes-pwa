@@ -39,3 +39,15 @@ Upload all 11 files to the **existing** `studentcouncilcaloocan-cyber/church-not
 - Internal canonical references and cache keys remain unchanged. Existing local data is not migrated or cleared.
 - The selected translation controls display language; typed language is accepted in either form.
 - API-fetched verse text remains translation-specific; unavailable translations are not silently substituted.
+
+
+Share card update: entering a reference automatically retrieves selected translation; Create share card from a verse populates fields directly. Attribution/version is drawn beneath the verse reference (near the verse), not in the card footer. #MCGIKnows remains optional footer.
+
+
+## Final share-card layout update
+- Creating a share card from a retrieved verse populates its reference, text and version without a second Auto-fill click.
+- Canvas/PNG layout is: localized reference, verse text, Bible version immediately below the verse, and #MCGIKnows in the footer.
+- No API provider/source text is drawn on the card.
+- Bible translation is still selected in Bible Companion; underlying API/cache behavior is unchanged.
+- Existing notes, IndexedDB records, localStorage keys and backup formats are unchanged.
+- GitHub Pages: upload all 12 files to repository root; refresh twice online after deployment.
