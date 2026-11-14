@@ -1,7 +1,7 @@
 {
-  "name": "Church Notes",
-  "short_name": "Church Notes",
-  "description": "Offline-first church notes with multi-version Bible lookup, verse cards and portable backups",
+  "name": "MCGI Notes",
+  "short_name": "MCGI Notes",
+  "description": "Offline-first MCGI Notes with Bible verse cards, inline references and portable backups",
   "start_url": "./#home",
   "scope": "./",
   "display": "standalone",

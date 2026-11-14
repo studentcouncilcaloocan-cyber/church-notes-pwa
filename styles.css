@@ -10,3 +10,7 @@
 
 /* Phase 5 Bible API */
 .api-verse-result{padding:14px;margin:12px 0;border:1px solid var(--line);border-radius:12px}.api-verse-result h3{margin-top:0}.api-verse-result .verse-quote{white-space:pre-wrap}.api-verse-result .actions{flex-wrap:wrap}
+
+/* MCGI Notes v1.1 — inline Bible reference suggestions */
+.bible-suggestion{position:fixed;z-index:1200;width:min(310px,calc(100vw - 16px));background:var(--card,#fff);color:var(--text,#172a43);border:1px solid var(--border,#d7e0ec);box-shadow:0 12px 32px rgba(0,0,0,.18);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.bible-suggestion[hidden]{display:none!important}.bible-suggestion small{color:var(--muted,#65748b)}.bible-suggestion .actions{margin:0;flex-wrap:wrap}.bible-suggestion button{font-size:.85rem}
