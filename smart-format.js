@@ -9,24 +9,28 @@ function removePrefix(ctx,count){const r=selection().getRangeAt(0).cloneRange();
   if(ctx.before.length!==count)return false;
   r.deleteContents();return true;
 }
-function listFromMarker(ctx){const match=/^([1-9]\d*\.|-)\s$/.exec(ctx.before);if(!match||ctx.before!==ctx.text)return false;
-  const ordered=match[1]!=='-';if(!removePrefix(ctx,ctx.before.length))return false;
-  // Put caret inside the now-empty block before issuing the native list command.
-  const range=document.createRange();range.selectNodeContents(ctx.block);range.collapse(true);selection().removeAllRanges();selection().addRange(range);
-  document.execCommand(ordered?'insertOrderedList':'insertUnorderedList',false,null);
-  if(ordered){const li=selection().anchorNode?.parentElement?.closest('li')||editor.querySelector('li:last-child');const ol=li?.closest('ol');if(ol)ol.start=parseInt(match[1],10);}
-  changed();return true;
+function setCaretAtStart(el){const r=document.createRange();r.selectNodeContents(el);r.collapse(true);const sel=selection();sel.removeAllRanges();sel.addRange(r);}
+function convertList(ctx,marker){
+ const ordered=marker!=='-';const start=ordered?parseInt(marker,10):1;
+ // Replace the current paragraph in place instead of running execCommand,
+ // which can move the current line to the top of a surrounding list.
+ let block=ctx.block;
+ if(block===editor){const p=document.createElement('p');const r=selection().getRangeAt(0).cloneRange();r.selectNodeContents(editor);r.deleteContents();editor.appendChild(p);block=p;}
+ const list=document.createElement(ordered?'ol':'ul');
+ if(ordered&&start!==1)list.start=start;
+ const li=document.createElement('li');li.appendChild(document.createElement('br'));list.appendChild(li);
+ const y=window.scrollY;
+ block.replaceWith(list);
+ setCaretAtStart(li);
+ // Keep the viewport steady when the editor is far down a long note.
+ if(Math.abs(window.scrollY-y)>2)window.scrollTo({top:y,behavior:'instant'});
+ changed();return true;
 }
+function listFromMarker(ctx){const match=/^([1-9]\d*\.|-)\s$/.exec(ctx.before);if(!match||ctx.before!==ctx.text||ctx.block.matches?.('li,blockquote'))return false;return convertList(ctx,match[1]);}
 function trySpace(e){if(composing)return;const ctx=context();if(!ctx||ctx.block.matches?.('li,blockquote'))return;
-  // beforeinput happens before the space is inserted; keydown is a fallback.
-  if(ctx.before!==ctx.text||!/^([1-9]\d*\.|-)$/.test(ctx.before))return;
-  e.preventDefault();
-  // Convert the marker without relying on a synthetic input event from mobile keyboards.
-  const marker=ctx.before+' ';const r=selection().getRangeAt(0).cloneRange();r.setStart(ctx.block,0);r.deleteContents();
-  const range=document.createRange();range.selectNodeContents(ctx.block);range.collapse(true);selection().removeAllRanges();selection().addRange(range);
-  const ordered=ctx.before!=='-';document.execCommand(ordered?'insertOrderedList':'insertUnorderedList',false,null);
-  if(ordered){let node=selection().anchorNode;node=node?.nodeType===1?node:node?.parentElement;const ol=node?.closest?.('ol')||editor.querySelector('ol:last-child');if(ol)ol.start=parseInt(ctx.before,10);}
-  changed();
+ if(ctx.before!==ctx.text||!/^([1-9]\d*\.|-)$/.test(ctx.before))return;
+ if(e.cancelable===false)return;
+ e.preventDefault();convertList(ctx,ctx.before);
 }
 editor.addEventListener('compositionstart',()=>composing=true);
 editor.addEventListener('compositionend',()=>composing=false);

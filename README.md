@@ -1,3 +1,1 @@
-MCGI Notes v1.4.4 — Mobile single-spacing and smart-list correction.
-Upload all files to existing GitHub Pages repository root. Backup notes JSON first.
-No IndexedDB schema changes. Verify on Android Chrome: hyphen-space, 1.-space, 3.-space, Enter on populated and empty list, Backspace on empty list, Undo, and Bible suggestions.
+MCGI Notes v1.4.5 — 1.5 line spacing; no paragraph margins; in-place automatic list conversion. Existing IndexedDB data and offline Bible library unchanged. Back up notes before deployment. Browser and mobile keyboard behavior require live verification.
