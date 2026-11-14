@@ -1,5 +1,5 @@
 (()=>{"use strict";
-const $=s=>document.querySelector(s),pages=[["home","⌂ Home"],["notes","▤ All Notes"],["editor","✎ Notes Editor"],["calendar","▦ Calendar"],["bookmarks","☆ Bookmarks"],["categories","◈ Categories"],["bible","▣ Bible Companion"],["settings","⚙ Settings"]];
+const $=s=>document.querySelector(s),pages=[["home","⌂ Home"],["notes","▤ All Notes"],["editor","✎ Notes Editor"],["calendar","▦ Calendar"],["bookmarks","☆ Bookmarks"],["categories","◈ Categories"],["bible","▣ Bible Companion"],["settings","⚙ Settings"],["backup","⇩ Backup & Restore"]];
 let db,notes=[],categories=[],activeId=null,dirty=false,saveTimer=null,renderToken=0,month=new Date().getMonth(),year=new Date().getFullYear(),selectedDay=null,installPrompt=null;
 const defaultCats=["Thanksgiving","Worship Service","Prayer Meeting","Bible Exposition","Other"];
 const id=()=>crypto.randomUUID?crypto.randomUUID():"n"+Date.now()+Math.random().toString(36).slice(2);
@@ -51,12 +51,12 @@ function categoryScreen(){shell("Categories","Use preset gatherings or add your 
 function settings(){shell("Settings","Personalize the offline application.");$("#content").insertAdjacentHTML("beforeend",`<section class="card"><h2>Appearance</h2><label for="themeSelect">Color theme</label> <select id="themeSelect"><option value="system">Follow system</option><option value="light">Light</option><option value="dark">Dark</option></select><p class="muted">Database: IndexedDB (this device only).</p><p class="muted">Notes are not synchronized across devices. Export/restore backups will be implemented in Phase 4.</p></section>`);$("#themeSelect").value=theme();$("#themeSelect").onchange=e=>setTheme(e.target.value)}
 function bible(){window.ChurchNotesBible?.companion()}
 
-function render(){if(!db)return;nav();const p=current();if(p!=="editor"){activeId=null;editorControls=null;dirty=false}({home,notes:()=>library(false),editor,calendar,bookmarks:()=>library(true),categories:categoryScreen,bible,settings}[p]||home)()}
+function render(){if(!db)return;nav();const p=current();if(p!=="editor"){activeId=null;editorControls=null;dirty=false}({home,notes:()=>library(false),editor,calendar,bookmarks:()=>library(true),categories:categoryScreen,bible,settings,backup:()=>window.ChurchNotesBackup?.render()}[p]||home)()}
 addEventListener("hashchange",async()=>{await flush();render()});
 addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")flush().catch(console.error)});
 addEventListener("pagehide",()=>{flush().catch(console.error)});
 addEventListener("beforeunload",e=>{if(dirty){e.preventDefault();e.returnValue=""}});
 addEventListener("beforeinstallprompt",e=>{e.preventDefault();installPrompt=e;$("#installBtn").hidden=false});$("#installBtn").onclick=async()=>{if(!installPrompt)return;installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;$("#installBtn").hidden=true};
 if("serviceWorker"in navigator&&location.protocol!=="file:")addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(console.error));
-theme();init();
+window.ChurchNotesStorage={all,flush,db:()=>db};theme();init();
 })();

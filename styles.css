@@ -4,3 +4,6 @@
 @media(min-width:1050px){.verse-detected:has(.reference-result:not(:empty)){position:relative}}
 
 .verse-side-panel{position:fixed;right:0;top:0;bottom:0;width:min(430px,95vw);z-index:40;background:var(--panel);color:var(--fg);box-shadow:-8px 0 30px #0005;border-left:1px solid var(--line);padding:25px;overflow:auto}.verse-side-panel>button:first-child{float:right;margin-bottom:20px}
+
+/* Phase 4 backup controls */
+#content input[type=file]{max-width:100%;display:block;margin:14px 0}#content .checklabel{margin:15px 0}#backupStatus{min-height:24px;font-weight:600}
