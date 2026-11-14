@@ -28,7 +28,37 @@ function shell(title,subtitle){$("#content").innerHTML=`<h1>${title}</h1><p clas
 function noteList(arr,empty="No notes yet."){const wrap=document.createElement("section");wrap.className="card";if(!arr.length){wrap.innerHTML=`<p class="muted">${empty}</p>`;return wrap}for(const n of arr){const row=document.createElement("div");row.className="note-row";const btn=document.createElement("button");btn.className="open-note";btn.innerHTML=`<strong>${escapeHTML(n.title||"Untitled note")}</strong><p class="muted">${escapeHTML(textOf(n.body).slice(0,115)||"Empty note")}</p><span class="meta">${formatDate(n.date)} · ${escapeHTML(catName(n.categoryId))}${n.bookmarked?" · ★ Bookmarked":""}</span>`;btn.onclick=()=>openNote(n.id);row.append(btn);const star=document.createElement("button");star.textContent=n.bookmarked?"★":"☆";star.setAttribute("aria-label",n.bookmarked?"Remove bookmark":"Add bookmark");star.onclick=async()=>{n.bookmarked=!n.bookmarked;n.updatedAt=Date.now();await put("notes",n);render()};row.append(star);wrap.append(row)}return wrap}
 function catName(cid){return categories.find(c=>c.id===cid)?.name||"Uncategorized"}
 function sorted(arr){return [...arr].sort((a,b)=>b.updatedAt-a.updatedAt)}
-function home(){shell("Welcome to MCGI Notes","Your personal offline notebook and Bible verse cards.");const welcome=document.createElement("div");welcome.className="home-welcome";const heading=$("#content h1");const subtitle=$("#content .lead");const text=document.createElement("div");text.className="home-welcome-text";text.append(heading,subtitle);const create=document.createElement("button");create.className="primary home-create-note";create.textContent="+ Create Note";create.onclick=createNote;welcome.append(text,create);$("#content").prepend(welcome);window.ChurchNotesBible?.companion("share",$("#content"));const grid=document.createElement("div");grid.className="grid";grid.innerHTML=`<section class="card"><h2>${notes.length}</h2><p>Saved notes</p></section><section class="card"><h2>${notes.filter(n=>n.bookmarked).length}</h2><p>Bookmarked notes</p></section><section class="card"><h2>${categories.length}</h2><p>Gathering categories</p></section>`;$("#content").append(grid);const h=document.createElement("h2");h.textContent="Recent notes";h.style.marginTop="28px";$("#content").append(h,noteList(sorted(notes).slice(0,5)));}
+function home(){
+  // Build the welcome row as a single stable component before mounting the verse card.
+  const content=$("#content");
+  content.replaceChildren();
+  const welcome=document.createElement("section");
+  welcome.className="home-welcome";
+  welcome.setAttribute("aria-label","MCGI Notes welcome");
+  const text=document.createElement("div");
+  text.className="home-welcome-text";
+  const heading=document.createElement("h1");
+  heading.textContent="Welcome to MCGI Notes";
+  const subtitle=document.createElement("p");
+  subtitle.className="muted lead";
+  subtitle.textContent="Your personal offline notebook and Bible verse cards.";
+  text.append(heading,subtitle);
+  const create=document.createElement("button");
+  create.type="button";
+  create.className="primary home-create-note";
+  create.textContent="+ Create Note";
+  create.addEventListener("click",createNote);
+  welcome.append(text,create);
+  content.append(welcome);
+  // A failure in the Bible companion must never remove the welcome/action row.
+  try{window.ChurchNotesBible?.companion("share",content)}
+  catch(error){console.error("Bible share card failed to mount",error);const warning=document.createElement("p");warning.className="muted";warning.textContent="Bible card temporarily unavailable. Your notes are safe.";content.append(warning)}
+  const grid=document.createElement("div");grid.className="grid";
+  grid.innerHTML=`<section class="card"><h2>${notes.length}</h2><p>Saved notes</p></section><section class="card"><h2>${notes.filter(n=>n.bookmarked).length}</h2><p>Bookmarked notes</p></section><section class="card"><h2>${categories.length}</h2><p>Gathering categories</p></section>`;
+  content.append(grid);
+  const recent=document.createElement("h2");recent.textContent="Recent notes";recent.style.marginTop="28px";
+  content.append(recent,noteList(sorted(notes).slice(0,5)));
+}
 function library(bookmarks=false){shell(bookmarks?"Bookmarks":"All Notes",bookmarks?"Your pinned notes.":"Find, filter and organize your notes.");const filters=document.createElement("div");filters.className="filters";const search=document.createElement("input");search.placeholder="Search title, text, or category";search.setAttribute("aria-label","Search notes");const select=document.createElement("select");select.innerHTML='<option value="">All categories</option>'+categories.map(c=>`<option value="${escapeHTML(c.id)}">${escapeHTML(c.name)}</option>`).join("");const sort=document.createElement("select");sort.innerHTML='<option value="recent">Recently edited</option><option value="date">Gathering date</option><option value="title">Title A–Z</option>';const newBtn=document.createElement("button");newBtn.textContent="+ New Note";newBtn.className="primary";newBtn.onclick=createNote;filters.append(search,select,sort,newBtn);$("#content").append(filters);const holder=document.createElement("div");$("#content").append(holder);function update(){const q=search.value.trim().toLocaleLowerCase();let list=notes.filter(n=>(!bookmarks||n.bookmarked)&&(!select.value||n.categoryId===select.value)&&(!q||[n.title,textOf(n.body),catName(n.categoryId)].some(s=>s.toLocaleLowerCase().includes(q))));list=[...list].sort((a,b)=>sort.value==="title"?(a.title||"").localeCompare(b.title||""):sort.value==="date"?(b.date||"").localeCompare(a.date||""):b.updatedAt-a.updatedAt);holder.replaceChildren(noteList(list,"No matching notes."))}search.oninput=select.onchange=sort.onchange=update;update()}
 async function createNote(){if(!db)return;const n={id:id(),title:"",body:"",date:today(),categoryId:categories[0]?.id||"",bookmarked:false,createdAt:Date.now(),updatedAt:Date.now()};await put("notes",n);notes.push(n);openNote(n.id)}
 function openNote(nid){activeId=nid;route("editor/"+nid)}

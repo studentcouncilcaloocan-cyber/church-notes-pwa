@@ -14,3 +14,12 @@
 4. Wait for GitHub Pages deployment; open the PWA while online, refresh twice, then close/reopen. Some OS-installed icons can remain cached; reinstalling may be necessary **only after backing up** and checking data safety. Do not clear site data.
 
 Verify desktop and mobile splash logo, browser favicon, installed app icon, note data, Bible lookup, share cards, offline loading, and backup.
+
+
+## v1.3.3 Home rendering correction
+- Constructs the Welcome heading and Create Note button as one stable Home section before Bible card initialization.
+- Makes the Home heading/button independent of Bible Companion errors.
+- Responsive mobile layout with full-width Create Note button.
+- Adds cache-busting version query parameters and network-first service worker behavior for page navigation and versioned assets; offline fallback retained.
+- IndexedDB schema, app data, backup format, and Bible lookup logic unchanged.
+- Export JSON backup before uploading. Do not clear browser site data or uninstall.

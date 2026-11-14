@@ -60,3 +60,11 @@
 .launch-logo{width:min(70vw,290px);height:auto;max-height:52dvh;object-fit:contain;object-position:center;flex-shrink:1}
 .opening-bible{width:clamp(88px,20vw,135px)}
 @media(max-height:530px){.launch-stage{flex-direction:row;width:min(92vw,650px)}.launch-logo{width:min(44vw,260px);max-height:75dvh}.opening-bible{width:min(26vw,130px)}}
+
+/* v1.3.3: reliable Home welcome and mobile action placement */
+#content>.home-welcome{display:flex!important;align-items:center;justify-content:space-between;gap:18px;margin:0 0 20px;width:100%;visibility:visible!important;opacity:1!important}
+#content>.home-welcome>.home-welcome-text{flex:1;min-width:0}
+#content>.home-welcome h1{margin:0 0 6px;line-height:1.2}
+#content>.home-welcome .lead{margin:0}
+#content>.home-welcome .home-create-note{display:inline-flex;align-items:center;justify-content:center;min-height:44px;flex-shrink:0;white-space:nowrap}
+@media(max-width:640px){#content>.home-welcome{flex-direction:column;align-items:stretch;gap:12px}#content>.home-welcome .home-create-note{width:100%;min-height:46px}}
