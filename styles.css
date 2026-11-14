@@ -143,3 +143,30 @@
 .video-session.is-floating{position:fixed;z-index:999;bottom:16px;right:16px;width:min(380px,calc(100vw - 32px));background:var(--panel,#fff);color:var(--text,#17263e);border:1px solid var(--border,#dce4ef);border-radius:14px;padding:10px;box-shadow:0 14px 42px rgba(0,0,0,.25)}
 .video-session.is-floating .video-session-controls{justify-content:flex-end}
 @media(max-width:600px){.verse-card-heading{align-items:flex-start}.verse-of-day-label strong{font-size:16px}.video-session.is-floating{bottom:8px;right:8px;width:min(310px,calc(100vw - 16px))}#homeWorkspace #homeTop .welcome-brand-logo{height:45px;max-width:240px}}
+
+/* v1.5.1 responsive refinements */
+@media(min-width:851px){#homeWorkspace #homeTop h1{font-size:clamp(36px,3vw,46px)}#homeWorkspace #homeTop .welcome-brand-logo{height:clamp(64px,5.5vw,86px);max-width:390px}}
+.verse-card-home{margin-bottom:0;border-bottom-left-radius:14px;border-bottom-right-radius:14px}
+.verse-card-heading{justify-content:center;text-align:center}
+.verse-card-heading h2{width:100%;text-align:center}
+.verse-of-day-label{align-items:center;text-align:center;margin:0 auto;gap:5px}
+.verse-of-day-label strong{font-size:19px}
+.verse-of-day-label small{font-size:13px}
+.verse-card-standalone{display:flex;justify-content:center;align-items:flex-start;padding:20px 12px 32px;max-width:100%;overflow:visible}
+.verse-card-standalone .share-preview{display:block;width:auto!important;height:auto!important;max-height:none!important;max-width:min(100%,420px)!important;margin:0 auto!important;border-radius:2px;box-shadow:0 17px 38px #0003,0 3px 9px #0002;aspect-ratio:auto;object-fit:contain}
+.verse-card-standalone .share-preview[height="1920"]{width:min(100%,340px)!important}
+.verse-card-standalone .share-preview[height="1080"]{width:min(100%,520px)!important}
+.official-calendar iframe{display:block;width:100%;height:min(72vh,720px);min-height:450px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+.official-calendar .actions a{padding:10px 12px;border:1px solid var(--line);border-radius:9px;text-decoration:none}
+.bible-unified-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.bible-unified-form>*{width:100%;min-width:0}
+.bible-unified-form .bible-unified-query{grid-column:1/-1}
+.bible-combined .offline-bible-reader{max-height:65vh;overflow:auto}
+.video-session.is-floating{resize:both;overflow:auto;min-width:220px;min-height:190px;max-width:calc(100vw - 16px);max-height:calc(100dvh - 16px);width:380px}
+.video-session.is-floating .video-frame{width:100%;aspect-ratio:16/9}
+.video-drag-handle{display:none;user-select:none;touch-action:none;padding:6px 9px;margin-bottom:8px;border-radius:8px;background:var(--hover);font-size:12px;font-weight:600;cursor:move}
+.video-session.is-floating .video-drag-handle{display:block}
+@media(max-width:600px){.verse-card-standalone{padding:15px 4px 25px}.verse-card-standalone .share-preview[height="1920"]{width:min(80vw,340px)!important}.verse-card-standalone .share-preview[height="1080"]{width:min(95vw,520px)!important}.official-calendar iframe{min-height:460px}.video-session.is-floating{width:min(310px,calc(100vw - 16px))}}
+
+/* v1.5.1 Words of Wisdom: responsive in-app playlist player */
+.wisdom-library{min-width:0}.wisdom-search{display:block;width:100%;margin:12px 0 18px}.wisdom-layout{display:grid;grid-template-columns:minmax(0,2fr) minmax(200px,1fr);gap:16px;align-items:start}.wisdom-player{min-width:0}.wisdom-player iframe{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#121b2c}.wisdom-player p{margin:10px 0}.wisdom-playlists{display:grid;gap:8px;max-height:440px;overflow-y:auto;min-width:0}.wisdom-playlist-item{display:flex;gap:12px;align-items:center;text-align:left;min-width:0;overflow-wrap:anywhere;padding:13px}.wisdom-playlist-item[aria-pressed=true]{border-color:var(--accent);background:var(--hover)}.wisdom-playlist-icon{display:grid;place-items:center;flex:none;width:54px;height:40px;background:#1b2b46;color:white;border-radius:8px}.wisdom-library .actions a{padding:8px;border:1px solid var(--line);border-radius:8px}@media(max-width:760px){.wisdom-layout{grid-template-columns:1fr}.wisdom-playlists{max-height:270px}}

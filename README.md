@@ -1,9 +1,9 @@
-# MCGI Notes v1.5.0 — UI refinement and floating player
+# MCGI Notes v1.5.1 — UI & Bible update
 
-This is the full GitHub Pages root package, based on v1.4.9. Upload the **contents** of this folder to the existing repository root, not the folder itself.
+Based on v1.5.0. Includes movable/resizable manual floating YouTube player, dismissible Bible popup, desktop logo adjustment, centered Verse of the Day heading, standalone correctly proportioned story/square card preview, official MCGI Google events calendar embed, revised page descriptions, and unified offline Bible search/reader.
 
-Changes: proportional welcome brand logo; consistent SVG outline icons for navigation, note actions, and category actions; dialog close button moved to a separate header row; daily verse label aligned with card heading; standalone shadowed verse canvas; user-controlled floating Songs of Faith / Community Prayer player. The player starts muted because browsers commonly prohibit unmuted autoplay. Click inside the video to enable sound. Floating player is limited to this app's pages and requires internet. Opening another stream replaces the previous stream.
+The calendar uses the Google Calendar embed linked on https://mcgi.org/event-calendar/ (Asia/Manila). Facebook link is provided for announcements. Events are not invented or cached offline. YouTube and Google Calendar need internet.
 
-Existing IndexedDB schema, backup modules, Bible library, and PWA manifest are unchanged. Before deploying, export a JSON backup. No data reset is needed.
+Deploy all files to the existing GitHub Pages repository root. Export a JSON backup first. No IndexedDB schema changes.
 
-Verification: static JavaScript syntax and ZIP integrity; actual mobile keyboard, YouTube embedding, autoplay and playback persistence require device/browser tests.
+Words of Wisdom: two supplied YouTube playlists are embedded for in-app viewing, with a responsive video player and playlist selector. Playlist-name filtering is available. Individual video title search is NOT implemented because YouTube playlist metadata is unavailable without a supported API/verified metadata source. Playback depends on YouTube embed permissions and internet access.
