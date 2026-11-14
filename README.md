@@ -32,3 +32,10 @@ Upload all 11 files to the **existing** `studentcouncilcaloocan-cyber/church-not
 - Uses a new Bible API cache namespace to avoid previously mislabeled English passages; existing notes and backups remain untouched.
 - Other translation lookups still use bible-api.com.
 - This does not establish that the external provider is reliable or authorized for all uses. Verify live response and rights before sharing.
+
+
+## Hotfix 4: translation-aware reference labels
+- ADB uses Tagalog book names in lookup chips, preview citation, copied text, inserted notes and API-filled share cards. KJV and other English translations use English book names.
+- Internal canonical references and cache keys remain unchanged. Existing local data is not migrated or cleared.
+- The selected translation controls display language; typed language is accepted in either form.
+- API-fetched verse text remains translation-specific; unavailable translations are not silently substituted.
