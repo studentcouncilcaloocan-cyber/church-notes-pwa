@@ -17,3 +17,34 @@
 
 /* v1.2: Home-first share-card workspace */
 .verse-card-home{padding:clamp(16px,3vw,30px);border-radius:22px;box-shadow:0 12px 36px #172a4310}.verse-card-home>h2{font-size:23px;margin-bottom:14px}.verse-card-home .share-preview{width:min(100%,680px);max-height:580px;object-fit:contain;margin:0 auto 20px;box-shadow:0 12px 36px #0002;background:#18263d}.verse-card-home .share-fields{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:12px;margin:0 0 12px}.verse-card-home .share-fields>.field:nth-child(2){grid-column:auto}.verse-card-home .share-fields>.field:nth-child(n+3){min-width:0}.verse-card-home .share-fields>.checklabel{grid-column:1/-1}.verse-card-home .share-fields .field{min-width:0}.verse-card-home .share-fields select,.verse-card-home .share-fields input{width:100%;min-width:0}.verse-card-home .share-manual{margin:12px 0}.verse-card-home .share-manual summary{cursor:pointer;color:var(--muted);font-size:13px}.verse-card-home .share-manual textarea{width:100%;margin-top:10px}.verse-card-home .actions{margin-top:10px}.launch-splash{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;background:#070b15;transition:opacity .25s ease;pointer-events:auto}.launch-splash.splash-exit{opacity:0;pointer-events:none}.launch-stage{width:min(75vw,410px);display:grid;place-items:center;gap:10px}.opening-bible{width:min(45vw,230px);overflow:visible}.opening-bible path{stroke:#f8c83b;stroke-width:3;stroke-linejoin:round;fill:#142c83}.book-left{transform-origin:120px 125px;animation:openLeft 1s ease-out both}.book-right{transform-origin:120px 125px;animation:openRight 1s ease-out both}.book-spine{fill:none!important}.launch-logo{width:100%;max-height:240px;object-fit:contain;opacity:0;animation:logoReveal .55s ease-out 1s forwards}@keyframes openLeft{from{transform:scaleX(.06)}to{transform:scaleX(1)}}@keyframes openRight{from{transform:scaleX(.06)}to{transform:scaleX(1)}}@keyframes logoReveal{to{opacity:1;transform:translateY(-4px)}}@media(max-width:650px){.verse-card-home .share-fields{grid-template-columns:repeat(2,minmax(0,1fr))}.verse-card-home .share-fields>.field:nth-child(-n+2){grid-column:1/-1}.verse-card-home .share-preview{max-height:420px}}@media(prefers-reduced-motion:reduce){.book-left,.book-right,.launch-logo{animation:none;opacity:1}.launch-splash{transition:none}}
+
+/* v1.2 UI correction: follow the supplied compact five-control wireframe */
+.verse-card-home{max-width:100%;padding:clamp(14px,2.4vw,26px);overflow:hidden}
+.verse-card-home .share-preview{display:block;width:min(100%,660px);height:auto;max-height:560px;object-fit:contain;margin:0 auto 18px;border-radius:2px;box-shadow:0 3px 16px #0002}
+.verse-card-home .share-controls{max-width:100%;margin:0 auto}
+.verse-card-home .share-fields{display:flex;flex-direction:column;gap:9px;margin:0}
+.verse-card-home .share-row{display:grid;gap:9px;min-width:0}
+.verse-card-home .share-row-main{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.verse-card-home .share-row-style{grid-template-columns:repeat(3,minmax(0,1fr))}
+.verse-card-home .share-row>.field{min-width:0;gap:5px}
+.verse-card-home .share-row>.field label{font-size:12px}
+.verse-card-home .share-row input,.verse-card-home .share-row select{width:100%;min-width:0;height:44px;padding:8px 11px;font-size:14px}
+.verse-card-home .share-footer-row{display:flex;justify-content:flex-end;margin:12px 0 4px}
+.verse-card-home .share-footer-row .checklabel{display:inline-flex;align-items:center;gap:9px;grid-column:auto;margin:0!important;font-size:13px;color:var(--muted);cursor:pointer}
+.verse-card-home .share-footer-row .checklabel input{margin:0;flex:0 0 18px}
+.verse-card-home .actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0 8px}
+.verse-card-home .actions button,.verse-card-home .actions select{font-size:13px;padding:9px 11px;max-width:100%}
+.verse-card-home .share-manual{margin-top:8px}
+@media(max-width:560px){.verse-card-home .share-row-main{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.verse-card-home .share-row-style{grid-template-columns:repeat(3,minmax(0,1fr))}.verse-card-home .share-row input,.verse-card-home .share-row select{font-size:12px;padding:7px}.verse-card-home .share-row>.field label{font-size:11px}.verse-card-home .share-preview{max-height:440px}.verse-card-home .actions button,.verse-card-home .actions select{flex:1 1 auto}}
+@media(max-width:350px){.verse-card-home .share-row-main{grid-template-columns:1fr}.verse-card-home .share-row-style{grid-template-columns:1fr 1fr}.verse-card-home .share-row-style>.field:last-child{grid-column:1/-1}}
+/* Splash: fully contained exact logo, no cropping or oversizing */
+.launch-splash{background:#070b15;overflow:hidden}
+.launch-stage{width:min(86vw,460px);max-height:90dvh;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:16px;overflow:visible}
+.opening-bible{width:clamp(110px,24vw,174px);height:auto;flex-shrink:0;overflow:visible}
+.launch-logo{display:block;width:min(80vw,390px);height:auto;max-height:min(40dvh,270px);object-fit:contain;object-position:center;opacity:0;transform:translateY(12px) scale(.96);animation:mcgiLogoReveal .55s ease-out .9s both}
+.book-left{animation:mcgiBookLeft .9s cubic-bezier(.18,.75,.28,1) both}
+.book-right{animation:mcgiBookRight .9s cubic-bezier(.18,.75,.28,1) both}
+@keyframes mcgiBookLeft{0%{transform:scaleX(.06)}100%{transform:scaleX(1)}}
+@keyframes mcgiBookRight{0%{transform:scaleX(.06)}100%{transform:scaleX(1)}}
+@keyframes mcgiLogoReveal{from{opacity:0;transform:translateY(12px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(prefers-reduced-motion:reduce){.book-left,.book-right,.launch-logo{animation:none;transform:none;opacity:1}}

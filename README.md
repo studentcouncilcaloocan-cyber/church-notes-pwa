@@ -17,3 +17,10 @@ Upload all root-level files to the existing `church-notes-pwa` GitHub Pages repo
 6. Verify notes, inline suggestions, settings, offline mode, and backup.
 
 No data migration or staging. Browser acceptance testing remains required.
+
+
+## UI correction (November 14, 2026)
+- Verse card preview first; two compact control rows (search/version, size/font/theme); footer toggle and actions aligned.
+- Exact user-supplied logo with transparent margins trimmed only, centered with contain fit.
+- Bible reference then version then verse body, optional #MCGIKnows footer.
+- Cache key bumped; no database schema or backup changes.
