@@ -73,3 +73,13 @@
 #homeTop[hidden]{display:none!important}
 #homeTop{max-width:100%;margin:0 auto 20px;width:100%}
 @media(max-width:640px){#homeTop{flex-direction:column;align-items:stretch}#homeTop .home-create-note{width:100%}}
+
+/* v1.3.5: Home heading and share card share the same centered content column. */
+#homeWorkspace{max-width:1150px;margin:0 auto;padding:26px 34px 34px;}
+#homeWorkspace #homeTop{width:100%;max-width:100%;margin:0 0 16px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+#homeWorkspace #content{width:100%;min-width:0;}
+#homeWorkspace #content>.verse-card-home{margin-top:0;}
+#homeWorkspace #homeTop h1{font-size:clamp(24px,2.3vw,30px);margin:0 0 5px;}
+#homeWorkspace #homeTop .lead{margin:0;}
+@media(max-width:850px){#homeWorkspace{padding:20px 14px 28px;}}
+@media(max-width:640px){#homeWorkspace #homeTop{align-items:stretch;flex-direction:column;gap:12px;margin-bottom:16px;}#homeWorkspace #homeTop .home-create-note{width:100%;}}

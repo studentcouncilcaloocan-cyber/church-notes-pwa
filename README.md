@@ -1,1 +1,5 @@
 MCGI Notes v1.3.4 — stable Home header correction. The welcome heading and Create Note button are in index.html outside #content, so Bible card rendering cannot remove them. Header only shows on Home. Existing database, API, logos, backup, icons, and URL unchanged. Back up notes before upload. Upload all 17 files to existing GitHub Pages repository root.
+
+
+## v1.3.5
+Moved the Home welcome section INSIDE the same centered main workspace as the Bible share card. Same width/padding and 16px vertical gap. No data schema changes.
