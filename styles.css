@@ -7,3 +7,6 @@
 
 /* Phase 4 backup controls */
 #content input[type=file]{max-width:100%;display:block;margin:14px 0}#content .checklabel{margin:15px 0}#backupStatus{min-height:24px;font-weight:600}
+
+/* Phase 5 Bible API */
+.api-verse-result{padding:14px;margin:12px 0;border:1px solid var(--line);border-radius:12px}.api-verse-result h3{margin-top:0}.api-verse-result .verse-quote{white-space:pre-wrap}.api-verse-result .actions{flex-wrap:wrap}

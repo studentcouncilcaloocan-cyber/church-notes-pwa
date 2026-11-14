@@ -1,7 +1,7 @@
 {
   "name": "Church Notes",
   "short_name": "Church Notes",
-  "description": "Offline-first church notes with Bible reference companion and verse share cards",
+  "description": "Offline-first church notes with multi-version Bible lookup, verse cards and portable backups",
   "start_url": "./#home",
   "scope": "./",
   "display": "standalone",

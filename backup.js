@@ -1,6 +1,6 @@
 (()=>{"use strict";
 const DB_NAME="church-notes",STORES=["notes","categories","settings","bibleVersions"];
-const LOCAL_KEYS=["cn-theme","cn-phase3-preferences","cn-phase3-licensed-verse-excerpts","cn-phase3-versions","cn-phase3-templates"];
+const LOCAL_KEYS=["cn-theme","cn-phase3-preferences","cn-phase3-licensed-verse-excerpts","cn-phase3-versions","cn-phase3-templates","cn-phase5-api-version","cn-phase5-api-verse-cache"];
 const LIMIT=20*1024*1024;
 const safeText=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const status=(msg,bad=false)=>{const e=document.getElementById("backupStatus");if(e){e.textContent=msg;e.style.color=bad?"#c33":""}};
@@ -11,7 +11,8 @@ async function snapshot(){await window.ChurchNotesStorage.flush();const db=getDB
 function validate(raw){if(!raw||typeof raw!=="object"||Array.isArray(raw)||raw.format!=="church-notes-backup"||raw.schema!==1)throw new Error("Not a supported Church Notes backup (schema 1).");if(!raw.stores||typeof raw.stores!=="object"||!raw.localStorage||typeof raw.localStorage!=="object")throw new Error("Missing backup sections.");const out={format:raw.format,schema:1,exportedAt:raw.exportedAt,stores:{},localStorage:{}};let count=0;
 for(const s of STORES){const rows=raw.stores[s];if(!Array.isArray(rows)||rows.length>50000)throw new Error("Invalid "+s+" collection.");const keys=new Set();out.stores[s]=rows.map(item=>{if(!item||typeof item!=="object"||Array.isArray(item))throw new Error("Invalid "+s+" record.");const key=s==="settings"?"key":"id";if(typeof item[key]!=="string"||!item[key]||item[key].length>250||keys.has(item[key]))throw new Error("Missing or duplicate record key in "+s+".");keys.add(item[key]);if(s==="notes"){if(typeof item.title!=="string"||typeof item.body!=="string"||item.title.length>500||item.body.length>1000000||typeof item.date!=="string"||!/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(item.date)||typeof item.bookmarked!=="boolean")throw new Error("Invalid note fields.");if(item.categoryId!=null&&typeof item.categoryId!=="string")throw new Error("Invalid note category.");}if(s==="categories"&&(typeof item.name!=="string"||!item.name.trim()||item.name.length>100))throw new Error("Invalid category.");return structuredClone(item)});count+=rows.length}
 for(const k of LOCAL_KEYS){const v=raw.localStorage[k];if(v!==null&&v!==undefined&&typeof v!=="string")throw new Error("Invalid local setting: "+k);if(typeof v==="string"&&v.length>3000000)throw new Error("Oversized local setting: "+k);out.localStorage[k]=v??null}
-for(const k of LOCAL_KEYS.filter(x=>x!=="cn-theme")){const v=out.localStorage[k];if(v!==null){try{JSON.parse(v)}catch{throw new Error("Invalid JSON setting: "+k)}}}
+for(const k of LOCAL_KEYS.filter(x=>x!=="cn-theme"&&x!=="cn-phase5-api-version")){const v=out.localStorage[k];if(v!==null){try{JSON.parse(v)}catch{throw new Error("Invalid JSON setting: "+k)}}}
+if(out.localStorage["cn-phase5-api-version"]!==null&&!/^[a-z0-9-]{2,24}$/.test(out.localStorage["cn-phase5-api-version"]))throw new Error("Invalid API translation identifier.");
 if(out.localStorage["cn-theme"]!==null&&! ["light","dark","system"].includes(out.localStorage["cn-theme"]))throw new Error("Invalid theme value.");
 const catIDs=new Set(out.stores.categories.map(x=>x.id));for(const n of out.stores.notes){if(n.categoryId&&!catIDs.has(n.categoryId))throw new Error("Note references a missing category: "+n.id)}
 return {data:out,count}}
