@@ -24,3 +24,11 @@ Upload all 11 files to the **existing** `studentcouncilcaloocan-cyber/church-not
 - Restore is **replace**, not merge. In case of power loss between IndexedDB and localStorage operations, recovery is not fully atomic across both systems.
 - There are no official MCGI Bible API or licensed verse datasets bundled.
 - Syntax and package integrity checked, not live-browser end-to-end tested.
+
+
+## Hotfix 3: ADB translation mismatch
+- ADB 1905 uses the getBible Tagalog endpoint directly rather than accepting English content from the generic API.
+- ADB responses must pass a conservative Tagalog-language sanity check before display or caching. Some legitimate very short verses may be rejected; manual excerpts remain available.
+- Uses a new Bible API cache namespace to avoid previously mislabeled English passages; existing notes and backups remain untouched.
+- Other translation lookups still use bible-api.com.
+- This does not establish that the external provider is reliable or authorized for all uses. Verify live response and rights before sharing.
