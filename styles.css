@@ -115,3 +115,31 @@
 .verse-of-day-label{font-size:13px;margin:0 0 10px}
 @media(max-width:850px){.mobile-brand-logo{display:block}}
 @media(max-width:420px){.mobile-brand-logo{width:105px}.welcome-brand-logo{max-width:100%;height:32px}}
+
+/* v1.5.0: consistent outline icons, compact actions and responsive layout */
+.line-icon{width:20px;height:20px;flex:none;display:inline-block;vertical-align:middle}
+#nav button{display:flex;align-items:center;gap:12px;text-align:left}
+#nav .line-icon{width:21px;height:21px}
+.compact-icon .line-icon{width:20px;height:20px}
+#homeWorkspace #homeTop h1{display:flex;align-items:center;flex-wrap:wrap;gap:.25em;font-size:clamp(25px,2.7vw,38px);line-height:1.25}
+#homeWorkspace #homeTop .welcome-brand-logo{height:clamp(43px,4.4vw,67px);max-width:min(60vw,320px);width:auto;vertical-align:middle;object-fit:contain}
+.verse-dialog{box-sizing:border-box;max-width:min(94vw,850px);max-height:90dvh;overflow:auto}
+.verse-dialog-header{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:12px;min-width:0}
+.verse-dialog-header strong{font-size:1.15rem;overflow-wrap:anywhere}
+.verse-dialog .verse-close{position:static!important;float:none!important;margin:0!important;flex:none;z-index:auto}
+.verse-dialog .api-verse-result,.verse-dialog .reference-result{min-width:0;max-width:100%;box-sizing:border-box}
+.verse-dialog .actions{flex-wrap:wrap}
+.verse-dialog input,.verse-dialog select,.verse-dialog button{max-width:100%}
+.verse-card-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+.verse-card-heading h2{margin:0}
+.verse-of-day-label{display:flex;flex-direction:column;align-items:flex-end;text-align:right;gap:4px;margin:0}
+.verse-of-day-label strong{font-size:inherit;font-weight:700}
+.verse-of-day-label small{font-size:12px;color:var(--muted,#68788c);font-weight:400}
+.verse-card-home .share-preview{display:block;margin:0 auto 22px;max-width:min(100%,540px);height:auto;background:transparent;box-shadow:0 15px 40px rgba(10,20,40,.24),0 3px 9px rgba(10,20,40,.10);border-radius:3px}
+.verse-card-home .share-preview::before{display:none}
+.video-dock{min-width:0}
+.video-session{max-width:100%}
+.video-session-controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.video-session.is-floating{position:fixed;z-index:999;bottom:16px;right:16px;width:min(380px,calc(100vw - 32px));background:var(--panel,#fff);color:var(--text,#17263e);border:1px solid var(--border,#dce4ef);border-radius:14px;padding:10px;box-shadow:0 14px 42px rgba(0,0,0,.25)}
+.video-session.is-floating .video-session-controls{justify-content:flex-end}
+@media(max-width:600px){.verse-card-heading{align-items:flex-start}.verse-of-day-label strong{font-size:16px}.video-session.is-floating{bottom:8px;right:8px;width:min(310px,calc(100vw - 16px))}#homeWorkspace #homeTop .welcome-brand-logo{height:45px;max-width:240px}}

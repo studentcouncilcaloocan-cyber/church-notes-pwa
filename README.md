@@ -1,11 +1,9 @@
-# MCGI Notes v1.4.9 — Bible, Branding and Video Menus
+# MCGI Notes v1.5.0 — UI refinement and floating player
 
-Complete upload-ready GitHub Pages root files. Based on v1.4.8. No IndexedDB schema changes.
+This is the full GitHub Pages root package, based on v1.4.9. Upload the **contents** of this folder to the existing repository root, not the folder itself.
 
-- Combined Bible Reader and Search Bible Text under one Bible menu.
-- Added Songs of Faith and Community Prayer YouTube-nocookie embeds (requires internet).
-- Added supplied transparent brand artwork to sidebar, mobile header and Home welcome heading; retained PWA app icons and opening splash artwork.
-- Renamed Bible Verse Share Cards UI to Bible Verse Card and selects a stable verse reference per local calendar day. Verse text loads from installed offline Bible or network when available. If not available, it remains editable manually.
-- Preserved Notes Editor access, notes, backup, and offline Bible download settings.
+Changes: proportional welcome brand logo; consistent SVG outline icons for navigation, note actions, and category actions; dialog close button moved to a separate header row; daily verse label aligned with card heading; standalone shadowed verse canvas; user-controlled floating Songs of Faith / Community Prayer player. The player starts muted because browsers commonly prohibit unmuted autoplay. Click inside the video to enable sound. Floating player is limited to this app's pages and requires internet. Opening another stream replaces the previous stream.
 
-Before deployment, export a JSON notes backup. Upload all root files to the existing repository. Test on desktop/mobile, including offline behavior. YouTube playback requires internet and is subject to video owner embedding restrictions.
+Existing IndexedDB schema, backup modules, Bible library, and PWA manifest are unchanged. Before deploying, export a JSON backup. No data reset is needed.
+
+Verification: static JavaScript syntax and ZIP integrity; actual mobile keyboard, YouTube embedding, autoplay and playback persistence require device/browser tests.
