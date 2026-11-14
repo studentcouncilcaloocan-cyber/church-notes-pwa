@@ -48,3 +48,15 @@
 @keyframes mcgiBookRight{0%{transform:scaleX(.06)}100%{transform:scaleX(1)}}
 @keyframes mcgiLogoReveal{from{opacity:0;transform:translateY(12px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
 @media(prefers-reduced-motion:reduce){.book-left,.book-right,.launch-logo{animation:none;transform:none;opacity:1}}
+
+/* v1.3.1: Home welcome row and responsive layout */
+.home-welcome{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:0 0 22px}
+.home-welcome-text{min-width:0;flex:1}.home-welcome h1{margin:0 0 5px}.home-welcome .lead{margin:0}
+.home-create-note{flex-shrink:0;white-space:nowrap;min-height:44px}
+@media(max-width:640px){.home-welcome{align-items:stretch;flex-direction:column;gap:12px;margin-bottom:18px}.home-welcome h1{font-size:clamp(23px,6vw,31px);line-height:1.2}.home-welcome .lead{font-size:13px}.home-create-note{width:100%;min-height:46px}.verse-card-home{padding:12px}.verse-card-home .share-row-main{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.verse-card-home .share-row-style{grid-template-columns:repeat(3,minmax(0,1fr))}.verse-card-home .share-fields input,.verse-card-home .share-fields select{min-width:0;max-width:100%}.verse-card-home .actions{gap:7px}}
+@media(max-width:390px){.verse-card-home .share-row-main{grid-template-columns:1fr}.verse-card-home .share-row-style{grid-template-columns:1fr 1fr}.verse-card-home .share-row-style>.field:last-child{grid-column:1/-1}}
+/* Splash: original square MCGI Notes logo remains fully visible */
+.launch-stage{width:min(92vw,430px);max-height:95dvh;gap:10px;overflow:visible}
+.launch-logo{width:min(70vw,290px);height:auto;max-height:52dvh;object-fit:contain;object-position:center;flex-shrink:1}
+.opening-bible{width:clamp(88px,20vw,135px)}
+@media(max-height:530px){.launch-stage{flex-direction:row;width:min(92vw,650px)}.launch-logo{width:min(44vw,260px);max-height:75dvh}.opening-bible{width:min(26vw,130px)}}

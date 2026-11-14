@@ -1,13 +1,16 @@
-# MCGI Notes v1.3 — Direct Update
+# MCGI Notes v1.3.2 — Final Logo Assignments
 
-Upload all files in this ZIP to the root of the existing `church-notes-pwa` GitHub repository on `main`. Export a JSON backup first. Keep the same GitHub Pages URL and browser profile to retain IndexedDB data.
+**Source:** MCGI Notes v1.3.1 complete working package.
 
-Changes:
-- Favicon and 192/512 PWA icons use the user's supplied MCGI Notes logo, centered with safe margins.
-- Inline suggestion Insert Verse replaces the exact typed reference in place with localized reference + retrieved verse text, preserving surrounding rich-text content and avoiding duplicate paragraphs.
-- If lookup fails or the text changes during retrieval, original text remains unchanged.
-- New cache version refreshes PWA assets.
+- Opening animation uses the exact user-supplied **transparent** MCGI Notes logo in `mcgi-notes-logo.png` over the existing navy background.
+- Browser favicons, Apple touch icon, PWA icons and `icon.svg` use the user-supplied **blue-background** MCGI Notes artwork, scaled proportionally and with safe margins.
+- `index.html` updates favicon/touch-icon references; `sw.js` refreshes the PWA cache and precaches the touch icon.
+- All other application JavaScript, Bible API, rich-text editor, backup, settings, and styles are preserved from v1.3.1. No database migration.
 
-Tests required on desktop and mobile: reference alone; reference mid-sentence; bold/italic neighboring text; ADB/KJV; offline cached lookup; failed lookup; autosave and reload; icon after PWA refresh.
+## Direct GitHub Pages update
+1. Export a full JSON backup from MCGI Notes before uploading.
+2. Extract ZIP, then upload **all 17 files** (not the ZIP) to the root of `studentcouncilcaloocan-cyber/church-notes-pwa` on `main`.
+3. Commit as `Fix final MCGI Notes splash and app icons`.
+4. Wait for GitHub Pages deployment; open the PWA while online, refresh twice, then close/reopen. Some OS-installed icons can remain cached; reinstalling may be necessary **only after backing up** and checking data safety. Do not clear site data.
 
-No IndexedDB schema changes, no new hosting or staging.
+Verify desktop and mobile splash logo, browser favicon, installed app icon, note data, Bible lookup, share cards, offline loading, and backup.
