@@ -83,3 +83,6 @@
 #homeWorkspace #homeTop .lead{margin:0;}
 @media(max-width:850px){#homeWorkspace{padding:20px 14px 28px;}}
 @media(max-width:640px){#homeWorkspace #homeTop{align-items:stretch;flex-direction:column;gap:12px;margin-bottom:16px;}#homeWorkspace #homeTop .home-create-note{width:100%;}}
+
+/* v1.4 Offline Bible Library */
+.offline-bible-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0 20px}.offline-bible-item{border:1px solid var(--border,#d9e0ea);border-radius:12px;padding:14px;display:flex;flex-wrap:wrap;align-items:center;gap:10px}.offline-bible-item strong,.offline-bible-item p{width:100%;margin:0}.offline-bible-controls{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.offline-bible-controls input,.offline-bible-controls select{flex:1 1 130px;min-width:0}.offline-bible-reader{max-height:420px;overflow:auto;border:1px solid var(--border,#d9e0ea);border-radius:10px;padding:14px}.offline-bible-reader p{line-height:1.6}@media(max-width:650px){.offline-bible-row{grid-template-columns:1fr}.offline-bible-controls>*{flex:1 1 100%}}
