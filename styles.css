@@ -313,3 +313,16 @@
 }
 @media(max-width:380px){.bible-unified-selectors{grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr)}.bible-unified-selectors>select{grid-column:auto!important}}
 @media(max-width:850px){.mobile-editor-card .editor-format-toolbar{flex-wrap:wrap;overflow:visible;gap:5px}.mobile-editor-card .editor-format-toolbar .editor-list-choices{z-index:55}}
+
+/* v1.5.7 mobile Bible spacing and direct paragraph menu */
+@media(max-width:650px){
+ .bible-combined .bible-unified-form{gap:14px}
+ .bible-combined .bible-unified-selectors{gap:12px;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr)}
+ .bible-combined .bible-unified-selectors>*{border-radius:12px;min-width:0;min-height:48px}
+ .bible-combined .bible-unified-form>select{margin-bottom:12px}
+ .bible-combined .offline-bible-reader{margin-top:12px}
+}
+.editor-block-wrap .editor-block-menu{position:absolute;top:calc(100% + 6px);right:0;left:auto;z-index:100;display:flex;flex-direction:column;gap:2px;padding:6px;border:1px solid var(--line);border-radius:12px;background:var(--panel);box-shadow:0 8px 25px #0002;min-width:155px}
+.editor-block-wrap .editor-block-menu.hidden{display:none}
+.editor-block-menu button{width:100%;text-align:left;white-space:nowrap}
+.mobile-editor-card .editor-format-toolbar{overflow:visible}
