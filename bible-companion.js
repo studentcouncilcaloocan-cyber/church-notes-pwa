@@ -77,7 +77,7 @@ const loadCard=async()=>{const parsed=detect(ref.value)[0];if(!parsed)return;con
 const scheduleCard=()=>{++fetchSequence;clearTimeout(fetchTimer);quote.value="";draw();if(detect(ref.value)[0])fetchTimer=setTimeout(loadCard,350)};
 const savePNG=btn("Download PNG",()=>{draw(true);const a=document.createElement("a");a.download=`mcgi-notes-verse-${size.value}.png`;a.href=canvas.toDataURL("image/png");a.click()},"primary");
 const sharePNG=btn("Share image",async()=>{draw(true);if(!navigator.share||!navigator.canShare){alert("Native sharing is unavailable here. Use Download PNG.");return}const blob=await new Promise(ok=>canvas.toBlob(ok,"image/png"));if(!blob)return;const f=new File([blob],"church-notes-verse.png",{type:"image/png"});if(navigator.canShare({files:[f]}))try{await navigator.share({files:[f],title:"Bible verse card"})}catch(e){if(e.name!=="AbortError")alert("Share failed. Use Download PNG.")}else alert("Image sharing is not supported. Use Download PNG.")});
-actions.append(savePNG,sharePNG,template,load,save);const manual=document.createElement("details");manual.className="share-manual";const manualSummary=document.createElement("summary");manualSummary.textContent="Edit verse text manually";manual.append(manualSummary,field("Verse text",quote));const footerRow=document.createElement("div");footerRow.className="share-footer-row";footerRow.append(footLabel);const controls=document.createElement("div");controls.className="share-controls";controls.append(fields,footerRow,actions,manual,warning);
+actions.append(savePNG,sharePNG);const manual=document.createElement("details");manual.className="share-manual";const manualSummary=document.createElement("summary");manualSummary.textContent="Edit verse text manually";manual.append(manualSummary,field("Verse text",quote));const footerRow=document.createElement("div");footerRow.className="share-footer-row";footerRow.append(footLabel);const controls=document.createElement("div");controls.className="share-controls";controls.append(fields,footerRow,actions,manual,warning);
 // Title sits outside the white box, while date, preview and controls stay inside.
 const titleOutside=document.createElement("h2");titleOutside.className="verse-card-outside-title";titleOutside.textContent="Bible Verse Card";
 const previewStage=document.createElement("div");previewStage.className="verse-card-standalone";previewStage.append(canvas);
@@ -87,14 +87,16 @@ const dailyTitle=document.createElement("strong");dailyTitle.textContent="VERSE 
 const dailyDate=document.createElement("small");dailyDate.textContent=new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
 dailyHeader.append(miniLogo,dailyTitle,dailyDate);
 const mobileActions=document.createElement("div");mobileActions.className="mobile-verse-actions";
-const popup=document.createElement("div");popup.className="mobile-verse-popup hidden";popup.setAttribute("role","dialog");popup.setAttribute("aria-label","Bible Verse Card options");
+const popup=document.createElement("div");popup.className="mobile-verse-popup hidden";popup.dataset.mode="search";popup.setAttribute("role","dialog");popup.setAttribute("aria-label","Bible Verse Card options");
 const backdrop=document.createElement("div");backdrop.className="mobile-verse-backdrop hidden";
 const closePopup=()=>{popup.classList.add("hidden");backdrop.classList.add("hidden")};
-const openPopup=()=>{popup.classList.remove("hidden");backdrop.classList.remove("hidden")};
-const searchAction=btn("⌕",openPopup);searchAction.title="Search Bible verse";searchAction.setAttribute("aria-label","Search Bible verse");
-const shareAction=btn("⇧",()=>sharePNG.click());shareAction.title="Share image";shareAction.setAttribute("aria-label","Share image");
-const downloadAction=btn("↓",()=>savePNG.click());downloadAction.title="Download PNG";downloadAction.setAttribute("aria-label","Download PNG");
-const optionsAction=btn("•••",openPopup);optionsAction.title="Card options";optionsAction.setAttribute("aria-label","Card options");
+const openPopup=(mode)=>{popup.dataset.mode=mode;popup.classList.remove("hidden");backdrop.classList.remove("hidden")};
+const actionIcon=(paths)=>{const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");svg.setAttribute("viewBox","0 0 24 24");svg.setAttribute("width","23");svg.setAttribute("height","23");svg.setAttribute("fill","none");svg.setAttribute("stroke","currentColor");svg.setAttribute("stroke-width","2");svg.setAttribute("stroke-linecap","round");svg.setAttribute("stroke-linejoin","round");svg.innerHTML=paths;return svg};
+const iconAction=(paths,label,fn)=>{const b=btn("",fn);b.append(actionIcon(paths));b.title=label;b.setAttribute("aria-label",label);return b};
+const searchAction=iconAction('<circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/>',"Search Bible verse",()=>openPopup("search"));
+const shareAction=iconAction('<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.7 6.6-4.4M8.7 13.3l6.6 4.4"/>',"Share image",()=>sharePNG.click());
+const downloadAction=iconAction('<path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/>',"Download PNG",()=>savePNG.click());
+const optionsAction=iconAction('<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',"Card options",()=>openPopup("options"));
 mobileActions.append(searchAction,shareAction,downloadAction,optionsAction);
 const closeAction=btn("Close",closePopup);closeAction.className="mobile-verse-close";
 popup.append(closeAction);backdrop.addEventListener("click",closePopup);

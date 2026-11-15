@@ -1,4 +1,4 @@
-# MCGI Notes v1.5.4 — Mobile UI refinement
+# MCGI Notes v1.5.5 — Mobile UI refinement
 
 Mobile-only UI changes: compact sidebar, Settings source-label layout, Bible chapter/verse picker with automatic reading/search, Notes Editor highlight palette, Verse of the Day preview/actions, and scrollable Bible verse results. Existing notes, Bible IndexedDB, and other application functions are retained in source.
 
