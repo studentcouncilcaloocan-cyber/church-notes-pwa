@@ -182,3 +182,72 @@
 
 /* Words of Wisdom horizontal video library */
 .wisdom-library{min-width:0}.wisdom-tabs{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.wisdom-tabs button[aria-pressed=true],.wisdom-video-card[aria-pressed=true]{border-color:var(--accent);background:var(--hover)}.wisdom-player{max-width:900px;margin:auto}.wisdom-player iframe{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#121b2c}.wisdom-player p{margin:8px 0 16px}.wisdom-search{width:100%;margin:10px 0 18px}.wisdom-carousel-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.wisdom-carousel-heading h3{margin:0}.wisdom-carousel-arrows{display:flex;gap:8px}.wisdom-carousel-arrows button{font-size:24px;line-height:1;padding:4px 14px}.wisdom-video-track{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin;padding:12px 2px 16px}.wisdom-video-card{flex:0 0 clamp(155px,24vw,225px);scroll-snap-align:start;display:flex;flex-direction:column;gap:8px;padding:7px;text-align:left;min-width:0}.wisdom-video-card img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:7px;background:#14223b}.wisdom-video-card span{font-size:13px;line-height:1.35;overflow-wrap:anywhere;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}.wisdom-video-track>.muted{padding:12px 0}.wisdom-notice{font-size:13px}.wisdom-library .actions{flex-wrap:wrap}@media(max-width:600px){.wisdom-video-card{flex-basis:170px}}
+
+/* v1.5.4 — mobile refinement; desktop layouts and storage untouched */
+.mobile-verse-heading,.mobile-verse-actions,.mobile-verse-backdrop,.mobile-verse-close{display:none}
+.mobile-verse-popup{display:block}
+.bible-settings-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:end}
+.bible-settings-fields .field{min-width:0;max-width:100%}
+.bible-settings-fields input,.bible-settings-fields select{width:100%;min-width:0}
+.bible-settings-fields>button{width:max-content;max-width:100%;white-space:normal}
+.bible-unified-form{display:grid;gap:12px}
+.bible-unified-form>.bible-unified-query,.bible-unified-form>select{width:100%;min-height:48px}
+.bible-unified-selectors{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr) minmax(0,1fr);gap:8px}
+.bible-unified-selectors>*{min-width:0;width:100%;min-height:46px;text-align:center}
+.bible-unified-selectors>select{text-align:left}
+.bible-number-shade{position:fixed;inset:0;background:#0009;z-index:1001;display:flex;align-items:center;justify-content:center;padding:18px}
+.bible-number-dialog{background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:18px;padding:18px;width:min(460px,100%);max-height:min(80vh,680px);display:flex;flex-direction:column;gap:12px}
+.bible-number-head{display:flex;align-items:center;justify-content:space-between}
+.bible-number-grid{overflow:auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;padding:4px}
+.bible-number-grid button{padding:12px 3px;min-width:0}
+.reference-result,.bible-lookup-result,.bible-popup .verse-text,.bible-verse-text{max-height:min(42vh,360px);overflow-y:auto;overflow-wrap:anywhere}
+.editor-format-toolbar{gap:6px}
+.editor-format-toolbar button{min-width:38px;min-height:40px}
+.highlight-palette{display:inline-flex;gap:5px;flex-wrap:wrap;align-items:center}
+.highlight-palette button{width:34px;min-width:34px;padding:5px;color:#1a2b3c}
+@media(max-width:850px){
+ #sidebar{width:min(310px,82vw);padding:14px 12px;gap:14px;overflow-y:auto}
+ #sidebar nav{gap:1px}
+ #sidebar nav button{font-size:15px;padding:9px 12px;min-height:42px;display:flex;align-items:center;gap:12px}
+ #sidebar nav button svg{width:19px;height:19px;flex-shrink:0}
+ #sidebar .brand{padding:4px 8px}
+ .bible-settings-fields{grid-template-columns:minmax(0,1fr)}
+ .bible-settings-fields>button{width:100%;min-height:44px}
+ .bible-combined{padding:16px}
+ .bible-combined>h2{display:none}
+ .bible-unified-selectors{gap:6px}
+ .bible-unified-selectors>*{font-size:12px;padding:8px 4px}
+ .editor-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+ .editor-meta .field{min-width:0}
+ .editor-meta .field label{font-size:11px}
+ .editor-meta .field input,.editor-meta .field select{width:100%;min-width:0;font-size:12px;padding:8px 4px}
+ .editor-meta .field:last-child{align-items:center}
+ .note-title{font-size:21px}
+ .editor{min-height:320px;padding:14px}
+ .verse-card-home{position:relative}
+ .verse-card-home .verse-of-day-label{display:none}
+ .mobile-verse-heading{display:flex;align-items:center;flex-direction:column;text-align:center;gap:3px;margin-bottom:15px}
+ .mobile-verse-logo{display:block;width:116px;max-height:40px;object-fit:contain}
+ .mobile-verse-heading strong{font-family:Georgia,serif;font-size:clamp(19px,5vw,29px);line-height:1.1;letter-spacing:.3px}
+ .mobile-verse-heading small{font-size:12px;color:var(--muted)}
+ .verse-card-home .verse-card-standalone{padding:4px 4px 12px}
+ .verse-card-home .verse-card-standalone .share-preview{width:min(100%,380px)!important;max-height:none!important}
+ .mobile-verse-actions{display:flex;justify-content:center;gap:9px;margin-top:8px}
+ .mobile-verse-actions button{background:#28578d;color:white;border:0;min-width:43px;min-height:43px;font-size:20px;font-weight:600}
+ .mobile-verse-backdrop:not(.hidden){display:block;position:fixed;inset:0;background:#0009;z-index:1000}
+ .mobile-verse-popup{position:fixed;z-index:1001;left:50%;top:50%;transform:translate(-50%,-50%);width:min(92vw,540px);max-height:85vh;overflow-y:auto;background:var(--panel);color:var(--fg);padding:16px;border-radius:18px;box-shadow:0 20px 50px #0005}
+ .mobile-verse-popup.hidden{display:none!important}
+ .mobile-verse-close{display:block;margin-left:auto;margin-bottom:8px}
+ .verse-card-home .share-controls{width:100%}
+ .verse-card-home .share-row-main{grid-template-columns:1fr}
+ .verse-card-home .share-row-style{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .verse-card-home .share-fields .field{min-width:0}
+}
+@media(max-width:370px){.bible-unified-selectors{grid-template-columns:1fr 1fr}.bible-unified-selectors>select{grid-column:1/-1}.editor-meta{grid-template-columns:1fr 1fr}.editor-meta .field:nth-child(2){grid-column:2}.editor-meta .field:nth-child(3){grid-column:1/-1}}
+
+@media(max-width:850px){.verse-card-home .legacy-daily-label{display:none!important}}
+
+.api-verse-result .verse-quote,.api-verse-result>p:not(.muted){max-height:min(40vh,350px);overflow-y:auto;overflow-wrap:anywhere;white-space:pre-wrap}
+.mobile-home-create{display:none}
+@media(min-width:851px){.mobile-verse-popup.hidden{display:block!important}}
+@media(max-width:850px){.mobile-home-create{display:block;width:100%;margin:14px 0 24px;min-height:49px}#homeTop .home-create-note{display:none}#homeTop .home-welcome-text{display:none}#homeTop{margin:0!important;padding:0!important;height:0!important;overflow:hidden!important}#content>.verse-card-outside-title{display:none}#content>.verse-card-home{margin-top:0}}

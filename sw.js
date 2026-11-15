@@ -1,4 +1,4 @@
-const CACHE="mcgi-notes-v1-5-3-wisdom-catalog-20261115";
+const CACHE="mcgi-notes-v1-5-4-mobile-ui-20261115";
 const ASSETS=["./","./index.html","./styles.css","./app.js","./videos.json","./smart-format.js","./passage.js","./bible-api.js","./offline-bible.js","./bible-companion.js","./backup.js","./manifest.webmanifest","./icon.svg","./favicon-32.png","./favicon-48.png","./apple-touch-icon.png","./icon-192.png","./icon-512.png","./splash.js","./mcgi-notes-logo.png","./mcgi-notes-brand.png"];
 self.addEventListener("install",event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener("activate",event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
