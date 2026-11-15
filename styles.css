@@ -288,3 +288,28 @@
  .bible-unified-form>select,.bible-unified-query{min-width:0;max-width:100%;width:100%}
 }
 @media(max-width:380px){.bible-unified-selectors{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.bible-unified-selectors>select{grid-column:1/-1}}
+
+/* v1.5.6: approved mobile editor icons and exact Bible selector placement */
+.editor-list-wrap,.editor-block-wrap{position:relative;display:inline-flex;flex:0 0 auto}
+.editor-list-wrap>button,.editor-block-wrap>button{display:inline-flex;align-items:center;justify-content:center}
+.editor-list-choices{position:absolute;top:calc(100% + 6px);left:0;z-index:40;background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 25px #0002;padding:6px;min-width:155px;display:grid;gap:3px}
+.editor-list-choices button{white-space:nowrap;text-align:left}
+.editor-block-wrap #blockFormat{position:absolute;top:calc(100% + 6px);left:0;z-index:40;display:none;background:var(--panel);min-width:130px;box-shadow:0 8px 25px #0002}
+.editor-block-wrap #blockFormat.format-open{display:block}
+@media(max-width:850px){
+ .mobile-editor-card .editor-meta .bookmark-icon-control{position:relative;cursor:pointer;display:flex;align-items:center;justify-content:center}
+ .mobile-editor-card .bookmark-icon-control input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;margin:0}
+ .mobile-editor-card .bookmark-icon-control svg{pointer-events:none;width:23px;height:23px}
+ .mobile-editor-card .bookmark-icon-control:has(input:checked) svg{fill:var(--accent);stroke:var(--accent)}
+ .mobile-editor-card .date-icon-control{position:relative;display:flex;align-items:center;justify-content:center;min-width:0;height:42px;border:1px solid var(--line);border-radius:9px}
+ .mobile-editor-card .date-icon-control svg{position:absolute;pointer-events:none;width:23px;height:23px}
+ .mobile-editor-card .date-icon-control input[type=date]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+ .mobile-editor-card .editor-format-toolbar .editor-block-wrap #blockFormat{min-width:130px}
+ .bible-unified-form{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+ .bible-unified-form>.bible-unified-query{grid-column:1;min-width:0;width:100%}
+ .bible-unified-selectors{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);gap:8px;align-items:stretch;width:100%}
+ .bible-unified-selectors>*{grid-column:auto!important;min-width:0;width:100%;height:46px;box-sizing:border-box;font-size:clamp(11px,3vw,14px);padding:8px 5px}
+ .bible-unified-form>select{grid-column:1;width:100%;min-width:0;height:46px}
+}
+@media(max-width:380px){.bible-unified-selectors{grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr)}.bible-unified-selectors>select{grid-column:auto!important}}
+@media(max-width:850px){.mobile-editor-card .editor-format-toolbar{flex-wrap:wrap;overflow:visible;gap:5px}.mobile-editor-card .editor-format-toolbar .editor-list-choices{z-index:55}}

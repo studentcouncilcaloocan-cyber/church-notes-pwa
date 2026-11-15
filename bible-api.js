@@ -40,7 +40,7 @@ async function adbFallback(ref,signal){
 const pending=new Map();
 async function lookup(ref,v=version(),options={}){
  const passage=window.MCGIPassage?.parse(ref);
- if(passage&&passage.parts.length>1){
+ if(passage&&passage.groups.length>1){
   if(!ids.has(v))throw Error('Unsupported translation');
   // Preserve the user's comma/semicolon groups and their original order.
   // Fetch using the explicitly selected translation; never substitute English for ADB.
